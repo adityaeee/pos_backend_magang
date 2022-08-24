@@ -1,0 +1,4 @@
+buat table lalu migrasi
+buat model dari table
+buat route dari table
+buat controller dan validasi
