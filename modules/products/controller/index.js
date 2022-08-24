@@ -28,7 +28,7 @@ const getProductById = async(req, res) => {
 const createProduct = async(req, res) => {
     const schema = {
         id: { type: "string" },
-        name: { type: "string", min: 5, max: 50 },
+        name: { type: "string", min: 2, max: 50 },
         buyingPrice: { convert: true, type: 'number', positive: true, },
         sellingPrice: { convert: true, type: 'number', positive: true, },
         createdBy: { type: "string", },
