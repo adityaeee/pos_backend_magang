@@ -56,7 +56,7 @@ const updateProductById = async(req, res) => {
     }
 
     const schema = {
-        name: { type: "string", min: 5, max: 50, optional: true },
+        name: { type: "string", min: 2, max: 50, optional: true },
         buyingPrice: { convert: true, type: 'number', positive: true, optional: true },
         sellingPrice: { convert: true, type: 'number', positive: true, optional: true },
         updatedBy: { type: "string" },
