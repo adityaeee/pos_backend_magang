@@ -2,3 +2,6 @@ buat table lalu migrasi
 buat model dari table
 buat route dari table
 buat controller dan validasi
+
+buat migrasi table
+npx sequelize migration:create --name "namaTable"
