@@ -20,7 +20,7 @@ const getProductById = async(req, res) => {
         }
         res.status(200).json(product);
     } catch (error) {
-
+        res.status(404).json({ message: error.message });
     }
 
 };
@@ -69,7 +69,7 @@ const updateProductById = async(req, res) => {
 
     try {
         await product.update(req.body);
-        res.status(200).json({ message: `the product has been updated` });
+        res.status(200).json({ message: `the product has been updated`, product });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -80,7 +80,7 @@ const deletePruductById = async(req, res) => {
     const product = await Product.findByPk(id);
 
     if (!product) {
-        return res.status(404).json({ message: "data tidak ditemukan" });
+        return res.status(404).json({ message: "product not found" });
     };
 
     try {
