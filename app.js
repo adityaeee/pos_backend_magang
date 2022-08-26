@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./modules/user/route/index');
 const productsRouter = require('./modules/products/route/index');
 const purchaseItemRouter = require('./modules/purchaseItem/route/index');
+const purchasesRouter = require('./modules/purchases/route/index');
 
 
 var app = express();
@@ -22,5 +23,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/purchaseItem', purchaseItemRouter);
+app.use('/purchases', purchasesRouter);
 
 module.exports = app;

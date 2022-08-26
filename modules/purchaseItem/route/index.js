@@ -1,5 +1,4 @@
 const express = require('express');
-const { mkcol } = require('../../products/route');
 
 const router = express.Router();
 
