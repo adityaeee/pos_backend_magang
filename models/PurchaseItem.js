@@ -5,6 +5,15 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
+        purchaseId: {
+            type: DataTypes.UUID,
+            references: {
+                model: 'purchases',
+                key: 'id',
+            },
+            onDelete: 'RESTRICT',
+            onUpdate: 'CASCADE',
+        },
         productId: {
             type: DataTypes.UUID,
             references: {
@@ -36,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
         timesTamps: true,
-        tableName: 'purchaseItem'
+        tableName: 'purchase_items'
     })
 
     return PurchaseItem;

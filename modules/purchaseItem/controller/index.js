@@ -31,6 +31,7 @@ const createPurchaseItem = async(req, res) => {
     const schema = {
         id: { type: "string" },
         productId: { type: "string" },
+        purchaseId: { type: "string" },
         price: { type: "number", positive: true, convert: true },
         quantity: { type: "number", positive: true, convert: true },
         createdBy: { type: "string", },
@@ -60,6 +61,7 @@ const updatePurchaseItemById = async(req, res) => {
     const schema = {
         id: { type: "string", optional: true },
         productId: { type: "string", optional: true },
+        purchaseId: { type: "string", optional: true },
         price: { type: "number", positive: true, convert: true, optional: true },
         quantity: { type: "number", positive: true, convert: true, optional: true },
         updatedBy: { type: "string", },
