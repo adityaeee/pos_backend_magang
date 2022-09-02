@@ -65,7 +65,7 @@ const updateUserById = async(req, res) => {
         id: { type: "string", min: 5, max: 10, optional: true },
         name: { type: "string", min: 5, max: 50, optional: true },
         username: { type: "string", min: 5, max: 25, optional: true },
-        password: { type: "string", min: 5, optional: true },
+        // password: { type: "string", min: 5, optional: true },
         address: { type: "string", min: 5, optional: true },
         email: { type: "string", optional: true },
         phone: { type: "string", min: 11, optional: true },
@@ -78,8 +78,11 @@ const updateUserById = async(req, res) => {
     }
 
     try {
+        const { password } = user;
+        const data = {...req.body, password: password };
+
         // updateUser = await User.update(req.body, { where: { id } });
-        await user.update(req.body);
+        await user.update(data);
         res.status(200).json({ message: `the user has been updated` });
     } catch (error) {
         res.status(400).json({ message: error.message });

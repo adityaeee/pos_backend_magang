@@ -1,6 +1,6 @@
-const { PurchaseItem } = require('../../../models');
+const { PurchaseItem } = require("../../../models");
 
-const Validator = require('fastest-validator');
+const Validator = require("fastest-validator");
 
 const v = new Validator();
 
@@ -18,7 +18,7 @@ const getPurchaseItemById = async(req, res) => {
         const purchaseItem = await PurchaseItem.findByPk(req.params.id);
 
         if (!purchaseItem) {
-            res.status(404).json({ message: 'purchase item not found' });
+            res.status(404).json({ message: "purchase item not found" });
         }
 
         res.status(200).json(purchaseItem);
@@ -34,14 +34,14 @@ const createPurchaseItem = async(req, res) => {
         purchaseId: { type: "string" },
         price: { type: "number", positive: true, convert: true },
         quantity: { type: "number", positive: true, convert: true },
-        createdBy: { type: "string", },
+        createdBy: { type: "string" },
     };
 
     const validate = v.validate(req.body, schema);
 
     if (validate.lenght) {
         return res.status(404).json(validate);
-    };
+    }
 
     try {
         const createPurchaseItem = await PurchaseItem.create(req.body);
@@ -52,46 +52,45 @@ const createPurchaseItem = async(req, res) => {
 };
 
 const updatePurchaseItemById = async(req, res) => {
-    let purchaseItem = await PurchaseItem.findByPk(req.params.id)
-
-    if (!purchaseItem) {
-        res.status(404).json({ message: 'purchase item not found' });
-    };
-
     const schema = {
         id: { type: "string", optional: true },
         productId: { type: "string", optional: true },
         purchaseId: { type: "string", optional: true },
         price: { type: "number", positive: true, convert: true, optional: true },
         quantity: { type: "number", positive: true, convert: true, optional: true },
-        updatedBy: { type: "string", },
-    };
-
-    const validate = v.validate(req.body, schema);
-
-    if (validate.lenght) {
-        return res.status(404).json(validate);
+        updatedBy: { type: "string" },
     };
 
     try {
+        let purchaseItem = await PurchaseItem.findByPk(req.params.id);
+
+        if (!purchaseItem) {
+            res.status(404).json({ message: "purchase item not found" });
+        }
+
+        const validate = v.validate(req.body, schema);
+
+        if (validate.lenght) {
+            return res.status(404).json(validate);
+        }
+
         await purchaseItem.update(req.body);
-        res.status(200).json({ message: 'the product has been updated', purchaseItem });
+        res.status(200).json({ message: "the product has been updated", purchaseItem });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-
 };
 
 const deletePurchaseItemById = async(req, res) => {
     const purchaseItem = await PurchaseItem.findByPk(req.params.id);
 
     if (!purchaseItem) {
-        res.status(404).json({ message: 'purchase item not found' });
-    };
+        res.status(404).json({ message: "purchase item not found" });
+    }
 
     try {
         await purchaseItem.destroy();
-        res.status(200).json({ message: 'purchase item deleted' })
+        res.status(200).json({ message: "purchase item deleted" });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
