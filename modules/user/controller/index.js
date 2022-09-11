@@ -17,7 +17,8 @@ const getUsers = async(req, res) => {
 
 const getUserById = async(req, res) => {
     try {
-        const user = await User.findByPk(req.params.id);
+        const userData = req.userData;
+        const user = await User.findByPk(userData.id);
         if (!user) {
             return res.status(404).json({ message: "user not found" });
         }

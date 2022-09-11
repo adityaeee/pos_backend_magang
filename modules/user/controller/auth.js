@@ -1,6 +1,7 @@
 const { User } = require("../../../models");
 
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const Validator = require("fastest-validator");
 const v = new Validator();
@@ -18,7 +19,10 @@ const loginUser = async(req, res) => {
             return res.status(403).json({ message: "username or password is wrong" });
         }
 
-        res.status(200).json(userData);
+        const token = jwt.sign(JSON.stringify(userData.dataValues), process.env.JWT_KEY);
+        const data = {...userData.dataValues, token: token };
+        console.log(data);
+        res.status(200).json(data);
     } catch (error) {
         console.log({ message: error.message });
     }
